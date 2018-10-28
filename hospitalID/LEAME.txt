@@ -1,6 +1,6 @@
 Para utilizar con eclipse: 
 
-mvn eclipse:eclipse
+mvn eclipse:eclipse  
 
 Maven creara os ficheiros do proxecto e o classpath
 Despois, importar o proxecto desde o Eclipse.
