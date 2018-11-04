@@ -17,10 +17,13 @@ public class TipoDoenza {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="tipoDoenzaId")
 	@Column(name="idTipoDoenza")
 	private Long idTipoDoenza;	
+	
 	@Column(name="codigo", nullable=false, unique=true)
 	private String codigo;
+	
 	@Column(name="nome", nullable=false, unique=false)
 	private String nome;
+	
 	@Column(name="descricion")
 	private String descricion;
 	

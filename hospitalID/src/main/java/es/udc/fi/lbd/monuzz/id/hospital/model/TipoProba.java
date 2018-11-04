@@ -16,11 +16,14 @@ public class TipoProba {
 	@SequenceGenerator(name="tipoProbaId",sequenceName="id_tipoproba_seq")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="tipoProbaId")
 	@Column(name="idTipoProba")
-	private Long idTipoProba;	
+	private Long idTipoProba;
+	
 	@Column(name="codigo", nullable=false, unique=true)
 	private String codigo;
+	
 	@Column(name="nome", nullable=false, unique=true)
 	private String nome;
+	
 	@Column(name="descricion")
 	private String descricion;
 	

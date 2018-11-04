@@ -1,20 +1,27 @@
 package es.udc.fi.lbd.monuzz.id.hospital.model;
 
 import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 import es.udc.fi.lbd.monuzz.id.hospital.converters.LocalDateTimeAttributeConverter;
 
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="Cita")
 public abstract class Cita implements Comparable<Cita> {
 	
@@ -23,10 +30,16 @@ public abstract class Cita implements Comparable<Cita> {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="citaId")
 	@Column(name="idCita")
 	protected Long idCita;
+	
 	@Column(name="codigo", unique=true, nullable=false)
 	protected String codigo;
+	
 	@Column(name="dataHora", nullable=false)
+	@Type(type="timestamp")
 	protected LocalDateTime dataHora;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="idPaciente")
 	@Column(name="paciente", nullable=false)
 	protected Paciente paciente;
 

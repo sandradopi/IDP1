@@ -9,12 +9,18 @@ import java.util.TreeSet;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Type;
 
 import es.udc.fi.lbd.monuzz.id.hospital.converters.LocalDateAttributeConverter;
 
@@ -27,14 +33,22 @@ public class Paciente {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="pacienteId")
 	@Column(name="idPaciente")
 	private Long idPaciente;
+	
 	@Column(name="numPaciente", nullable=false, unique=true)
 	private String numPaciente;
+	
 	@Column(name="nomeCompleto", nullable=false)
 	private String nomeCompleto;
+	
 	@Column(name="dataNacemento")
+	@Type(type="date")
 	private LocalDate dataNacemento;
-	@Column(name="citas")
+	
+	
+	@OneToMany(mappedBy="paciente", fetch = FetchType.LAZY)
+	@Cascade({CascadeType.DELETE})
 	@OrderColumn(name="dataHora")
+	@Column(name="citas")
 	private SortedSet<Cita> citas = new TreeSet<Cita>(); 
 
 	// Clave surrogada: idPaciente

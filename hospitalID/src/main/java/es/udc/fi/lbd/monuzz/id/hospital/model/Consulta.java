@@ -6,19 +6,41 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="Consulta")
+@PrimaryKeyJoinColumn(name="idCita")
 public class Consulta extends Cita {
 	
 	@Column(name="motivo", nullable=false)
 	private String motivo;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="idMedico")
 	@Column(name="medico", nullable=false)
 	private Medico medico;
+	
 	@Column(name="informe")
 	private String informe;
+	
 	@Column(name="doenzas")
+	@Cascade({CascadeType.SAVE_UPDATE})
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+    		name = "CONSULTA-TIPODOENZA",
+    		joinColumns = {@JoinColumn(name = "idCita")},
+    		inverseJoinColumns = {@JoinColumn(name = "idTipoDoenza")}
+    		)
 	private Set<TipoDoenza> doenzas = new HashSet<TipoDoenza>();
 
 	// Atributos obrigatorios: motivo, medico

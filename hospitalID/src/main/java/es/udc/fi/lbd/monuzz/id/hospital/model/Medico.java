@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name="Medico")
 public class Medico {
@@ -17,13 +19,18 @@ public class Medico {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="medicoId")
 	@Column(name="idMedico")
 	private Long idMedico;	
+	
 	@Column(name="numColeciado", nullable=false, unique= true)
 	private String numColexiado;
+	
 	@Column(name="nomeCompleto",nullable=false)
 	private String nomeCompleto;
+	
 	@Column(name="especialidade", nullable=false)
 	private String especialidade;
+	
 	@Column(name="activo", nullable=false)
+	@Type(type="true_false")
 	private Boolean activo;
 	
 	// Clave surrogada: idMedico

@@ -4,16 +4,29 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="Proba")
+@PrimaryKeyJoinColumn(name="idCita")
 public class Proba extends Cita {
 	
 	@Column(name="especificacions", nullable=false)
 	private String especificacions;
+	
 	@Column(name="tipoProba", nullable=false)
+	@Cascade({CascadeType.SAVE_UPDATE})
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="idTipoProba")
 	private TipoProba tipoProba;
+	
 	@Column(name="resultado")
 	private String resultado;
 
