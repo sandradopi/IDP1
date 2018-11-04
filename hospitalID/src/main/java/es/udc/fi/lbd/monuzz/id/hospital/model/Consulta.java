@@ -4,12 +4,21 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Consulta")
 public class Consulta extends Cita {
 	
+	@Column(name="motivo", nullable=false)
 	private String motivo;
+	@Column(name="medico", nullable=false)
 	private Medico medico;
+	@Column(name="informe")
 	private String informe;
+	@Column(name="doenzas")
 	private Set<TipoDoenza> doenzas = new HashSet<TipoDoenza>();
 
 	// Atributos obrigatorios: motivo, medico

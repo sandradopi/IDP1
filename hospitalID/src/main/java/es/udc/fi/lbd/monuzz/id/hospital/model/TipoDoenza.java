@@ -1,10 +1,27 @@
 package es.udc.fi.lbd.monuzz.id.hospital.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="TipoDoenza")
 public class TipoDoenza {
 	
+	@Id
+	@SequenceGenerator(name="tipoDoenzaId",sequenceName="id_tipodoenza_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="tipoDoenzaId")
+	@Column(name="idTipoDoenza")
 	private Long idTipoDoenza;	
+	@Column(name="codigo", nullable=false, unique=true)
 	private String codigo;
+	@Column(name="nome", nullable=false, unique=false)
 	private String nome;
+	@Column(name="descricion")
 	private String descricion;
 	
 	// Clave surrogada: idTipoDoenza

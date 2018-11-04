@@ -2,10 +2,19 @@ package es.udc.fi.lbd.monuzz.id.hospital.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Proba")
 public class Proba extends Cita {
 	
+	@Column(name="especificacions", nullable=false)
 	private String especificacions;
+	@Column(name="tipoProba", nullable=false)
 	private TipoProba tipoProba;
+	@Column(name="resultado")
 	private String resultado;
 
 	// Atributos obrigatorios: especificacions, tipoproba
