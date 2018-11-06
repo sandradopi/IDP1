@@ -2,9 +2,11 @@ package es.udc.fi.lbd.monuzz.id.hospital.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import es.udc.fi.lbd.monuzz.id.hospital.model.Paciente;
 
-
+@Service
 public class PacienteServiceImpl implements PacienteService {
 
 	@Override

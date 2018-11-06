@@ -5,11 +5,13 @@ package es.udc.fi.lbd.monuzz.id.hospital.daos;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import es.udc.fi.lbd.monuzz.id.hospital.model.Medico;
 import es.udc.fi.lbd.monuzz.id.hospital.model.TipoDoenza;
 import es.udc.fi.lbd.monuzz.id.hospital.model.TipoProba;
 
-
+@Repository
 public class HospitalDAOImpl implements HospitalDAO {
 
 	@Override

@@ -30,7 +30,6 @@ public class Medico {
 	private String especialidade;
 	
 	@Column(name="activo", nullable=false)
-	@Type(type="true_false")
 	private Boolean activo;
 	
 	// Clave surrogada: idMedico

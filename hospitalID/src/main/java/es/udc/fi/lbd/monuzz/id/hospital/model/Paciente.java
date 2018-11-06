@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -41,13 +42,12 @@ public class Paciente {
 	private String nomeCompleto;
 	
 	@Column(name="dataNacemento")
-	@Type(type="date")
 	private LocalDate dataNacemento;
 	
 	
 	@OneToMany(mappedBy="paciente", fetch = FetchType.LAZY)
 	@Cascade({CascadeType.DELETE})
-	@OrderColumn(name="dataHora")
+	@OrderBy("dataHora")
 	@Column(name="citas")
 	private SortedSet<Cita> citas = new TreeSet<Cita>(); 
 

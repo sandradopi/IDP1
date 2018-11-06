@@ -2,9 +2,11 @@ package es.udc.fi.lbd.monuzz.id.hospital.daos;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import es.udc.fi.lbd.monuzz.id.hospital.model.Paciente;
 
-
+@Repository
 public class PacienteDAOHibImpl implements PacienteDAO {
 
 	@Override

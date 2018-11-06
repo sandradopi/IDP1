@@ -35,7 +35,6 @@ public abstract class Cita implements Comparable<Cita> {
 	protected String codigo;
 	
 	@Column(name="dataHora", nullable=false)
-	@Type(type="timestamp")
 	protected LocalDateTime dataHora;
 	
 	@ManyToOne(fetch = FetchType.EAGER)

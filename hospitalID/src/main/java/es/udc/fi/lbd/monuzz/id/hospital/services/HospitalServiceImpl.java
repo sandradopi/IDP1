@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 
-import es.udc.fi.lbd.monuzz.id.hospital.model.*;
+import org.springframework.stereotype.Service;
 
+import es.udc.fi.lbd.monuzz.id.hospital.model.*;
+@Service
 public class HospitalServiceImpl implements HospitalService {
 
 	@Override
