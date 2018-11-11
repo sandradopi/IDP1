@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import es.udc.fi.lbd.monuzz.id.hospital.model.Cita;
@@ -20,6 +22,8 @@ import es.udc.fi.lbd.monuzz.id.hospital.model.TipoProba;
 
 @Repository
 public class CitaDAOImpl implements CitaDAO {
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	@Override
 	public Long create(Cita minhaCita) {
