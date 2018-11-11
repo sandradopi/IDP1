@@ -31,7 +31,7 @@ public class Consulta extends Cita {
 	private String informe;
 	
 	@Column(name="doenzas")
-    @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
     		name = "CONSULTA-TIPODOENZA",
     		joinColumns = {@JoinColumn(name = "idCita")},

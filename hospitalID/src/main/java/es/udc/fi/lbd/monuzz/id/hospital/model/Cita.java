@@ -35,7 +35,7 @@ public abstract class Cita implements Comparable<Cita> {
 	protected LocalDateTime dataHora;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn( name="paciente", nullable=false)
+	@JoinColumn(name="paciente", nullable=false)
 	protected Paciente paciente;
 
 	// Clave surrogada: idCita
