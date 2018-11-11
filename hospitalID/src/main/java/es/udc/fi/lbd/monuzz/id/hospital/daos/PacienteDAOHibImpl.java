@@ -45,8 +45,8 @@ public class PacienteDAOHibImpl implements PacienteDAO {
 	}
 
 	@Override
-	public Paciente findPacienteById(Long idPaciente) {
-		 return (Paciente) sessionFactory.getCurrentSession().createQuery("from Paciente p where p.idPaciente = :idPaciente").setParameter("idPaciente", idPaciente).uniqueResult();
+	public Paciente findPacienteById(Long id) {
+		 return (Paciente) sessionFactory.getCurrentSession().createQuery("from Paciente p where p.idPaciente = :id").setParameter("id", id).uniqueResult();
 				
 	}
 

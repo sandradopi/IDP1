@@ -27,56 +27,63 @@ public class CitaDAOImpl implements CitaDAO {
 
 	@Override
 	public Long create(Cita minhaCita) {
-		// TODO Auto-generated method stub
-		return null;
+		if(minhaCita.getIdCita()!=null){
+			throw new RuntimeException("Intento de alta de cita xa persistente"+ minhaCita.toString());
+		}
+		Long id= (Long) sessionFactory.getCurrentSession().save(minhaCita);
+		sessionFactory.getCurrentSession().flush();
+		return id;
 	}
 
 	@Override
 	public void update(Cita minhaCita) {
-		// TODO Auto-generated method stub
+		if(minhaCita.getIdCita()==null){
+			throw new RuntimeException("Intento de modificación decita non persistente"+ minhaCita.toString());
+		}
+		sessionFactory.getCurrentSession().update(minhaCita);
+		sessionFactory.getCurrentSession().flush();
 		
 	}
 
 	@Override
 	public void remove(Cita minhaCita) {
-		// TODO Auto-generated method stub
+		if(minhaCita.getIdCita()==null){
+			throw new RuntimeException("Intento de borrado de cita non persistente"+  minhaCita.toString());
+		}
+		sessionFactory.getCurrentSession().delete(minhaCita);
+		sessionFactory.getCurrentSession().flush();
 		
 	}
 
 	@Override
 	public Cita findCitaById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		 return (Cita) sessionFactory.getCurrentSession().createQuery("from Cita p where p.idCita = :id").setParameter("id", id).uniqueResult();
 	}
 
 	@Override
 	public Cita findCitaByCodigo(String codigoCita) {
-		// TODO Auto-generated method stub
-		return null;
+		 return (Cita) sessionFactory.getCurrentSession().createQuery("from Cita p where p.codigo = :codigoCita").setParameter("codigoCita", codigoCita).uniqueResult();
 	}
 
 	@Override
 	public List<Consulta> findAllConsultasMedicoData(Medico meuMedico, LocalDate minhaData) {
-		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().createQuery("from Consulta c where c.medico = :meuMedico AND c.data = :minhaData order by c.data ").setParameter("meuMedico", meuMedico).setParameter("minhaData", minhaData).list();
+		
 	}
 
 	@Override
 	public List<Proba> findAllProbasData(LocalDate minhaData) {
-		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().createQuery("from Proba c where c.data = :minhaData order by c.data ").setParameter("minhaData", minhaData).list();
 	}
 
 	@Override
 	public List<Consulta> findAllConsultasPaciente(Paciente meuPaciente) {
-		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().createQuery("from Consulta c where c.paciente = :meuPaciente").setParameter("meuPaciente", meuPaciente).list();
 	}
 
 	@Override
 	public List<Proba> findAllProbasPaciente(Paciente meuPaciente) {
-		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().createQuery("from Proba c where c.paciente = :meuPaciente").setParameter("meuPaciente", meuPaciente).list();
 	}
 
 	@Override
