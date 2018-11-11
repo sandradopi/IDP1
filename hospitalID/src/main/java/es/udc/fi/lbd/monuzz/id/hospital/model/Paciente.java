@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -15,14 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Type;
-
 import es.udc.fi.lbd.monuzz.id.hospital.converters.LocalDateAttributeConverter;
 
 @Entity
@@ -45,10 +39,8 @@ public class Paciente {
 	private LocalDate dataNacemento;
 	
 	
-	@OneToMany(mappedBy="paciente", fetch = FetchType.LAZY)
-	@Cascade({CascadeType.DELETE})
+	@OneToMany(mappedBy="paciente", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@OrderBy("dataHora")
-	@Column(name="citas")
 	private SortedSet<Cita> citas = new TreeSet<Cita>(); 
 
 	// Clave surrogada: idPaciente

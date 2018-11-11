@@ -14,9 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Type;
-
 import es.udc.fi.lbd.monuzz.id.hospital.converters.LocalDateTimeAttributeConverter;
 
 
@@ -38,8 +35,7 @@ public abstract class Cita implements Comparable<Cita> {
 	protected LocalDateTime dataHora;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="idPaciente")
-	@Column(name="paciente", nullable=false)
+	@JoinColumn( name="paciente", nullable=false)
 	protected Paciente paciente;
 
 	// Clave surrogada: idCita

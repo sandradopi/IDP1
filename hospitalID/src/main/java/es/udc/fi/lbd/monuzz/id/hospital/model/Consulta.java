@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,9 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 @Entity
 @Table(name="Consulta")
 @PrimaryKeyJoinColumn(name="idCita")
@@ -26,16 +24,14 @@ public class Consulta extends Cita {
 	private String motivo;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="idMedico")
-	@Column(name="medico", nullable=false)
+	@JoinColumn(name="idMedico", nullable=false)
 	private Medico medico;
 	
 	@Column(name="informe")
 	private String informe;
 	
 	@Column(name="doenzas")
-	@Cascade({CascadeType.SAVE_UPDATE})
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.PERSIST)
     @JoinTable(
     		name = "CONSULTA-TIPODOENZA",
     		joinColumns = {@JoinColumn(name = "idCita")},
