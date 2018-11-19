@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.fi.lbd.monuzz.id.hospital.daos.CitaDAO;
+import es.udc.fi.lbd.monuzz.id.hospital.daos.HospitalDAO;
 import es.udc.fi.lbd.monuzz.id.hospital.daos.PacienteDAO;
 import es.udc.fi.lbd.monuzz.id.hospital.model.*;
 @Service
@@ -22,112 +23,239 @@ static Logger log= Logger.getLogger("hospital");
 @Autowired
 private CitaDAO citaDAO;
 
+@Autowired
+private HospitalDAO hospitalDAO;
+
 	@Override
+	@Transactional(value="myTransactionManager", readOnly=false)
 	public void altaNovoMedicoBD(Medico meuMedico) {
-		// TODO Auto-generated method stub
-		
+		try{
+			hospitalDAO.create(meuMedico);
+			log.info("Gravados os datos do medico: " + meuMedico.toString());
+			}catch(DataAccessException e){
+			log.error("Erro gravando os datos do medico: "+ meuMedico.toString());
+			throw e;
+			}	
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager", readOnly=false)
 	public void borradoMedicoBD(Medico meuMedico) {
-		// TODO Auto-generated method stub
+		try{
+			hospitalDAO.remove(meuMedico);
+			log.info("Borrados os datos do medico: " + meuMedico.toString());
+			}catch(DataAccessException e){
+			log.error("Erro borrando os datos do medico: "+ meuMedico.toString());
+			throw e;
+			}	
 		
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager", readOnly=false)
 	public void modificacionMedicoBD(Medico meuMedico) {
-		// TODO Auto-generated method stub
+		try{
+			hospitalDAO.update(meuMedico);
+			log.info("Actualizados os datos do medico: " + meuMedico.toString());
+			}catch(DataAccessException e){
+			log.error("Erro actualizando os datos do medico: "+ meuMedico.toString());
+			throw e;
+			}	
 		
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public Medico recuperarMedicoBDPorId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			Medico medico =hospitalDAO.findMedicoById(id);
+			log.info("Encontrado os datos do medico " +medico.toString()+" con id: " + id);
+			return medico;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando o medico de id: "+ id);
+			throw e;
+			}	
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public Medico recuperarMedicoBDPorNumColexiado(String numColexiado) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			Medico medico =hospitalDAO.findMedicoByNumColexiado(numColexiado);
+			log.info("Encontrado os datos do medico " +medico.toString()+" con numColexiado: " + numColexiado);
+			return medico;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando o medico de numColexiado: "+ numColexiado);
+			throw e;
+			}	
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public List<Medico> recuperarTodosMedicosBD() {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			List<Medico> medicos =hospitalDAO.findAllMedicos();
+			log.info("Encontrados datos de todas los medicos: " + medicos.toString());
+			return medicos;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando os datos de todos os medicos");
+			throw e;
+			}	
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager", readOnly=false)
 	public void altaNovoTipoDoenzaBD(TipoDoenza minhaDoenza) {
-		// TODO Auto-generated method stub
+		try{
+			hospitalDAO.create(minhaDoenza);
+			log.info("Gravados os datos da doenza: " + minhaDoenza.toString());
+			}catch(DataAccessException e){
+			log.error("Erro gravando os datos da doenza: "+ minhaDoenza.toString());
+			throw e;
+			}	
 		
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager", readOnly=false)
 	public void borradoTipoDoenzaBD(TipoDoenza minhaDoenza) {
-		// TODO Auto-generated method stub
+		try{
+			hospitalDAO.remove(minhaDoenza);
+			log.info("Borrados os datos da doenza: " + minhaDoenza.toString());
+			}catch(DataAccessException e){
+			log.error("Erro borrando os datos da doenza: "+ minhaDoenza.toString());
+			throw e;
+			}	
 		
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager", readOnly=false)
 	public void modificacionTipoDoenzaBD(TipoDoenza minhaDoenza) {
-		// TODO Auto-generated method stub
+		try{
+			hospitalDAO.update(minhaDoenza);
+			log.info("Actualizados os datos da doenza: " +minhaDoenza.toString());
+			}catch(DataAccessException e){
+			log.error("Erro actualizando os datos da doenza: "+ minhaDoenza.toString());
+			throw e;
+			}	
 		
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public TipoDoenza recuperarTipoDoenzaBDPorId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			TipoDoenza doenza =hospitalDAO.findTipoDoenzaById(id);
+			log.info("Encontrado os datos da doenza " +doenza.toString()+" con id: " + id);
+			return doenza;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando a doenza de id: "+ id);
+			throw e;
+			}	
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public TipoDoenza recuperarTipoDoenzaBDPorCodigo(String codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			TipoDoenza doenza =hospitalDAO.findTipoDoenzaByCodigo(codigo);
+			log.info("Encontrado os datos da doenza " +doenza.toString()+" con codigo: " + codigo);
+			return doenza;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando a doenza de codigo: "+ codigo);
+			throw e;
+			}	
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public List<TipoDoenza> recuperarTodosTiposDoenzasBD() {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			List<TipoDoenza> doenzas =hospitalDAO.findAllTiposDoenzas();
+			log.info("Encontrados datos de todas las doenzas: " + doenzas.toString());
+			return doenzas;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando os datos de todos as doenzas");
+			throw e;
+			}	
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager", readOnly=false)
 	public void altaNovoTipoProbaBD(TipoProba minhaProba) {
-		// TODO Auto-generated method stub
+		try{
+			hospitalDAO.create(minhaProba);
+			log.info("Gravados os datos da proba: " + minhaProba.toString());
+			}catch(DataAccessException e){
+			log.error("Erro gravando os datos da proba: "+ minhaProba.toString());
+			throw e;
+			}	
 		
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager", readOnly=false)
 	public void borradoTipoProbaBD(TipoProba minhaProba) {
-		// TODO Auto-generated method stub
+		try{
+			hospitalDAO.remove(minhaProba);
+			log.info("Borrados os datos da proba: " + minhaProba.toString());
+			}catch(DataAccessException e){
+			log.error("Erro borrando os datos da proba: "+ minhaProba.toString());
+			throw e;
+			}	
 		
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager", readOnly=false)
 	public void modificacionTipoProbaBD(TipoProba minhaProba) {
-		// TODO Auto-generated method stub
-		
+		try{
+			hospitalDAO.update(minhaProba);
+			log.info("Actualizados os datos da proba: " +minhaProba.toString());
+			}catch(DataAccessException e){
+			log.error("Erro actualizando os datos da proba: "+ minhaProba.toString());
+			throw e;
+			}	
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public TipoProba recuperarTipoProbaBDPorId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			TipoProba proba =hospitalDAO.findTipoProbaById(id);
+			log.info("Encontrado os datos da proba " +proba.toString()+" con id: " + id);
+			return proba;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando a proba de id: "+ id);
+			throw e;
+			}	
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public TipoProba recuperarTipoProbaBDPorCodigo(String codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			TipoProba proba =hospitalDAO.findTipoProbaByCodigo(codigo);
+			log.info("Encontrado os datos da proba " +proba.toString()+" con codigo: " + codigo);
+			return proba;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando a proba de codigo: "+ codigo);
+			throw e;
+			}	
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public List<TipoProba> recuperarTodosTiposProbasBD() {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			List<TipoProba> probas =hospitalDAO.findAllTiposProbas();
+			log.info("Encontrados datos de todas las probas: " + probas.toString());
+			return probas;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando os datos de todos as probas");
+			throw e;
+			}	
 	}
 
 	@Override
@@ -135,9 +263,9 @@ private CitaDAO citaDAO;
 	public void altaNovaCitaBD(Cita minhaCita) {
 		try{
 			citaDAO.create(minhaCita);
-			log.info("Gravados os datos de " + minhaCita.toString());
+			log.info("Gravados os datos da cita: " + minhaCita.toString());
 			}catch(DataAccessException e){
-			log.error("Erro gravando os datos de "+ minhaCita.toString());
+			log.error("Erro gravando os datos da cita: "+ minhaCita.toString());
 			throw e;
 			}	
 		
@@ -148,9 +276,9 @@ private CitaDAO citaDAO;
 	public void borradoCitaBD(Cita minhaCita) {
 		try{
 			citaDAO.remove(minhaCita);
-			log.info("Borrados os datos de " + minhaCita.toString());
+			log.info("Borrados os datos da cita: " + minhaCita.toString());
 			}catch(DataAccessException e){
-			log.error("Erro borrando os datos de "+ minhaCita.toString());
+			log.error("Erro borrando os datos da cita: "+ minhaCita.toString());
 			throw e;
 			}	
 		
@@ -161,9 +289,9 @@ private CitaDAO citaDAO;
 	public void modificacionCitaBD(Cita minhaCita) {
 		try{
 			citaDAO.update(minhaCita);
-			log.info("Actualizados os datos de " + minhaCita.toString());
+			log.info("Actualizados os datos da cita: " + minhaCita.toString());
 			}catch(DataAccessException e){
-			log.error("Erro actualizando os datos de "+ minhaCita.toString());
+			log.error("Erro actualizando os datos da cita: "+ minhaCita.toString());
 			throw e;
 			}	
 		

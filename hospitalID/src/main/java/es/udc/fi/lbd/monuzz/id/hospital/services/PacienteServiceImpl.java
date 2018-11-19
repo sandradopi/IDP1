@@ -90,7 +90,7 @@ private PacienteDAO pacienteDAO;
 	public List<Paciente> recuperarTodosPacientesBD() {
 		try{
 			List<Paciente> pacientes =pacienteDAO.findAllPacientes();
-			log.info("Encontradoos datos de todos os pacientes: " +pacientes.toString());
+			log.info("Encontrados datos de todos os pacientes: " +pacientes.toString());
 			return pacientes;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando os datos de todos os pacientes");

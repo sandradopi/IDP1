@@ -57,7 +57,7 @@ public class PacienteDAOHibImpl implements PacienteDAO {
 
 	@Override
 	public List<Paciente> findAllPacientes() {
-		 return sessionFactory.getCurrentSession().createQuery("from Paciente ").list();
+		 return sessionFactory.getCurrentSession().createQuery("from Paciente  p order by p.numPaciente desc ").list();
 	}
 
 }
