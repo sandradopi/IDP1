@@ -77,7 +77,7 @@ private PacienteDAO pacienteDAO;
 	public Paciente recuperarPacienteBDPorNumPaciente(String num) {
 		try{
 			Paciente paciente =pacienteDAO.findPacienteByNum(num);
-			log.info("Encontrado os datos do paciente " +paciente.toString()+" con numPaciente: " + num);
+			log.info("Encontrado os datos do paciente " +paciente+" con numPaciente: " + num);
 			return paciente;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando o paciente de numPaciente: "+ num);

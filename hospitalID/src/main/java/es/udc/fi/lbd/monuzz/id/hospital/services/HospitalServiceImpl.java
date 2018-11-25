@@ -82,7 +82,7 @@ private HospitalDAO hospitalDAO;
 	public Medico recuperarMedicoBDPorNumColexiado(String numColexiado) {
 		try{
 			Medico medico =hospitalDAO.findMedicoByNumColexiado(numColexiado);
-			log.info("Encontrado os datos do medico " +medico.toString()+" con numColexiado: " + numColexiado);
+			log.info("Encontrado os datos do medico " +medico+" con numColexiado: " + numColexiado);
 			return medico;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando o medico de numColexiado: "+ numColexiado);
@@ -160,7 +160,7 @@ private HospitalDAO hospitalDAO;
 	public TipoDoenza recuperarTipoDoenzaBDPorCodigo(String codigo) {
 		try{
 			TipoDoenza doenza =hospitalDAO.findTipoDoenzaByCodigo(codigo);
-			log.info("Encontrado os datos da doenza " +doenza.toString()+" con codigo: " + codigo);
+			log.info("Encontrado os datos da doenza " +doenza+" con codigo: " + codigo);
 			return doenza;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando a doenza de codigo: "+ codigo);
@@ -237,7 +237,7 @@ private HospitalDAO hospitalDAO;
 	public TipoProba recuperarTipoProbaBDPorCodigo(String codigo) {
 		try{
 			TipoProba proba =hospitalDAO.findTipoProbaByCodigo(codigo);
-			log.info("Encontrado os datos da proba " +proba.toString()+" con codigo: " + codigo);
+			log.info("Encontrado os datos da proba " +proba+" con codigo: " + codigo);
 			return proba;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando a proba de codigo: "+ codigo);
@@ -377,33 +377,64 @@ private HospitalDAO hospitalDAO;
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public SortedSet<Cita> recuperarTodasCitasPaciente(Paciente meuPaciente) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			SortedSet<Cita> citas = citaDAO.findAllCitasPaciente(meuPaciente);
+			log.info("Encontrados datos de todas las citas: " +citas.toString() +" do paciente: "+ meuPaciente);
+			return citas;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando os datos de todos as citas  do paciente: " + meuPaciente);
+			throw e;
+			}	
 	}
 
 	@Override
 	public Paciente recuperarPacienteCita(Cita minhaCita) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			Paciente paciente =citaDAO.findPacienteCita(minhaCita);
+			log.info("Encontrado os datos do paciente: " +paciente+" da cita: " + minhaCita);
+			return paciente;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando o paciente da cita: "+ minhaCita);
+			throw e;
+			}
 	}
 
 	@Override
 	public Medico recuperarMedicoConsulta(Consulta minhaConsulta) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			Medico medico =citaDAO.findMedicoConsulta(minhaConsulta);
+			log.info("Encontrado os datos do medico: " +medico+" da consulta: " + minhaConsulta);
+			return medico;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando o medico da consulta: "+ minhaConsulta);
+			throw e;
+			}
 	}
 
 	@Override
 	public Set<TipoDoenza> recuperarDoenzasConsulta(Consulta minhaConsulta) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			Set<TipoDoenza> doenzas =citaDAO.findAllDoenzasConsulta(minhaConsulta);
+			log.info("Encontrado os datos das doenzas: " + doenzas+" da consulta: " + minhaConsulta);
+			return doenzas;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando as doenzas da consulta: "+ minhaConsulta);
+			throw e;
+			}
 	}
 
 	@Override
 	public TipoProba recuperarTipoProba(Proba minhaProba) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			TipoProba  tipoProba  =citaDAO.findTipoProba(minhaProba);
+			log.info("Encontrado os datos do tipo da proba: " +tipoProba+" da proba: " + minhaProba);
+			return tipoProba;
+			}catch(DataAccessException e){
+			log.error("Erro encontrando o tipo da proba da proba: "+ minhaProba);
+			throw e;
+			}
 	}
 
 

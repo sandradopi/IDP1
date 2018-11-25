@@ -27,10 +27,10 @@ public class CitaDAOImpl implements CitaDAO {
 
 	@Override
 	public Long create(Cita minhaCita) {
-		if(minhaCita.getIdCita()!=null){
-			throw new RuntimeException("Intento de alta de cita xa persistente"+ minhaCita.toString());
+		if (minhaCita.getIdCita()!=null) {
+			throw new RuntimeException("Intento de alta de cita xa persistente" + minhaCita.toString());
 		}
-		Long id= (Long) sessionFactory.getCurrentSession().save(minhaCita);
+		Long id = (Long) sessionFactory.getCurrentSession().save(minhaCita);
 		sessionFactory.getCurrentSession().flush();
 		return id;
 	}
@@ -88,32 +88,29 @@ public class CitaDAOImpl implements CitaDAO {
 
 	@Override
 	public SortedSet<Cita> findAllCitasPaciente(Paciente meuPaciente) {
-		// TODO Auto-generated method stub
-		return null;
+		return (SortedSet<Cita>) sessionFactory.getCurrentSession().createQuery("from Cita c where c.paciente = :meuPaciente order by c.dataHora").setParameter("meuPaciente", meuPaciente).list();
 	}
 
 	@Override
 	public Paciente findPacienteCita(Cita minhaCita) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Paciente) sessionFactory.getCurrentSession().createQuery("Select p from Paciente p inner join p.citas c where c = :minhaCita").setParameter("minhaCita", minhaCita).uniqueResult();
+	 
 	}
 
 	@Override
 	public Medico findMedicoConsulta(Consulta minhaConsulta) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Medico) sessionFactory.getCurrentSession().createQuery("Select c.medico from Consulta c where c = :minhaConsulta").setParameter("minhaConsulta", minhaConsulta).uniqueResult();
+		
 	}
 
 	@Override
 	public Set<TipoDoenza> findAllDoenzasConsulta(Consulta minhaCita) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Set<TipoDoenza>) sessionFactory.getCurrentSession().createQuery("select c.doenzas from Consulta c where c = :minhaCita").setParameter("minhaCita", minhaCita).list();
 	}
 
 	@Override
 	public TipoProba findTipoProba(Proba minhaCita) {
-		// TODO Auto-generated method stub
-		return null;
+		return (TipoProba) sessionFactory.getCurrentSession().createQuery("Select c.tipoProba from Proba c where c = :minhaCita").setParameter("minhaCita", minhaCita).uniqueResult();
 	}
 
 }
