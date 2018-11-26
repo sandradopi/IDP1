@@ -390,6 +390,7 @@ private HospitalDAO hospitalDAO;
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public Paciente recuperarPacienteCita(Cita minhaCita) {
 		try{
 			Paciente paciente =citaDAO.findPacienteCita(minhaCita);
@@ -402,6 +403,7 @@ private HospitalDAO hospitalDAO;
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public Medico recuperarMedicoConsulta(Consulta minhaConsulta) {
 		try{
 			Medico medico =citaDAO.findMedicoConsulta(minhaConsulta);
@@ -414,6 +416,7 @@ private HospitalDAO hospitalDAO;
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public Set<TipoDoenza> recuperarDoenzasConsulta(Consulta minhaConsulta) {
 		try{
 			Set<TipoDoenza> doenzas =citaDAO.findAllDoenzasConsulta(minhaConsulta);
@@ -426,6 +429,7 @@ private HospitalDAO hospitalDAO;
 	}
 
 	@Override
+	@Transactional(value="myTransactionManager")
 	public TipoProba recuperarTipoProba(Proba minhaProba) {
 		try{
 			TipoProba  tipoProba  =citaDAO.findTipoProba(minhaProba);
