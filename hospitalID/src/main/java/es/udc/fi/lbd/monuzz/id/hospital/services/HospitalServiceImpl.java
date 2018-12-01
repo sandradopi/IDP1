@@ -31,9 +31,9 @@ private HospitalDAO hospitalDAO;
 	public void altaNovoMedicoBD(Medico meuMedico) {
 		try{
 			hospitalDAO.create(meuMedico);
-			log.info("Gravados os datos do medico: " + meuMedico.toString());
+			log.info("Gravados os datos do medico: " + meuMedico);
 			}catch(DataAccessException e){
-			log.error("Erro gravando os datos do medico: "+ meuMedico.toString());
+			log.error("Erro gravando os datos do medico: "+ meuMedico);
 			throw e;
 			}	
 	}
@@ -43,9 +43,9 @@ private HospitalDAO hospitalDAO;
 	public void borradoMedicoBD(Medico meuMedico) {
 		try{
 			hospitalDAO.remove(meuMedico);
-			log.info("Borrados os datos do medico: " + meuMedico.toString());
+			log.info("Borrados os datos do medico: " + meuMedico);
 			}catch(DataAccessException e){
-			log.error("Erro borrando os datos do medico: "+ meuMedico.toString());
+			log.error("Erro borrando os datos do medico: "+ meuMedico);
 			throw e;
 			}	
 		
@@ -56,9 +56,9 @@ private HospitalDAO hospitalDAO;
 	public void modificacionMedicoBD(Medico meuMedico) {
 		try{
 			hospitalDAO.update(meuMedico);
-			log.info("Actualizados os datos do medico: " + meuMedico.toString());
+			log.info("Actualizados os datos do medico: " + meuMedico);
 			}catch(DataAccessException e){
-			log.error("Erro actualizando os datos do medico: "+ meuMedico.toString());
+			log.error("Erro actualizando os datos do medico: "+ meuMedico);
 			throw e;
 			}	
 		
@@ -69,7 +69,7 @@ private HospitalDAO hospitalDAO;
 	public Medico recuperarMedicoBDPorId(Long id) {
 		try{
 			Medico medico =hospitalDAO.findMedicoById(id);
-			log.info("Encontrado os datos do medico " +medico.toString()+" con id: " + id);
+			log.info("Encontrado os datos do medico " +medico+" con id: " + id);
 			return medico;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando o medico de id: "+ id);
@@ -121,9 +121,9 @@ private HospitalDAO hospitalDAO;
 	public void borradoTipoDoenzaBD(TipoDoenza minhaDoenza) {
 		try{
 			hospitalDAO.remove(minhaDoenza);
-			log.info("Borrados os datos da doenza: " + minhaDoenza.toString());
+			log.info("Borrados os datos da doenza: " + minhaDoenza);
 			}catch(DataAccessException e){
-			log.error("Erro borrando os datos da doenza: "+ minhaDoenza.toString());
+			log.error("Erro borrando os datos da doenza: "+ minhaDoenza);
 			throw e;
 			}	
 		
@@ -134,9 +134,9 @@ private HospitalDAO hospitalDAO;
 	public void modificacionTipoDoenzaBD(TipoDoenza minhaDoenza) {
 		try{
 			hospitalDAO.update(minhaDoenza);
-			log.info("Actualizados os datos da doenza: " +minhaDoenza.toString());
+			log.info("Actualizados os datos da doenza: " +minhaDoenza);
 			}catch(DataAccessException e){
-			log.error("Erro actualizando os datos da doenza: "+ minhaDoenza.toString());
+			log.error("Erro actualizando os datos da doenza: "+ minhaDoenza);
 			throw e;
 			}	
 		
@@ -147,7 +147,7 @@ private HospitalDAO hospitalDAO;
 	public TipoDoenza recuperarTipoDoenzaBDPorId(Long id) {
 		try{
 			TipoDoenza doenza =hospitalDAO.findTipoDoenzaById(id);
-			log.info("Encontrado os datos da doenza " +doenza.toString()+" con id: " + id);
+			log.info("Encontrado os datos da doenza " +doenza+" con id: " + id);
 			return doenza;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando a doenza de id: "+ id);
@@ -173,7 +173,7 @@ private HospitalDAO hospitalDAO;
 	public List<TipoDoenza> recuperarTodosTiposDoenzasBD() {
 		try{
 			List<TipoDoenza> doenzas =hospitalDAO.findAllTiposDoenzas();
-			log.info("Encontrados datos de todas las doenzas: " + doenzas.toString());
+			log.info("Encontrados datos de todas las doenzas: " + doenzas);
 			return doenzas;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando os datos de todos as doenzas");
@@ -186,9 +186,9 @@ private HospitalDAO hospitalDAO;
 	public void altaNovoTipoProbaBD(TipoProba minhaProba) {
 		try{
 			hospitalDAO.create(minhaProba);
-			log.info("Gravados os datos da proba: " + minhaProba.toString());
+			log.info("Gravados os datos da proba: " + minhaProba);
 			}catch(DataAccessException e){
-			log.error("Erro gravando os datos da proba: "+ minhaProba.toString());
+			log.error("Erro gravando os datos da proba: "+ minhaProba);
 			throw e;
 			}	
 		
@@ -199,9 +199,9 @@ private HospitalDAO hospitalDAO;
 	public void borradoTipoProbaBD(TipoProba minhaProba) {
 		try{
 			hospitalDAO.remove(minhaProba);
-			log.info("Borrados os datos da proba: " + minhaProba.toString());
+			log.info("Borrados os datos da proba: " + minhaProba);
 			}catch(DataAccessException e){
-			log.error("Erro borrando os datos da proba: "+ minhaProba.toString());
+			log.error("Erro borrando os datos da proba: "+ minhaProba);
 			throw e;
 			}	
 		
@@ -212,9 +212,9 @@ private HospitalDAO hospitalDAO;
 	public void modificacionTipoProbaBD(TipoProba minhaProba) {
 		try{
 			hospitalDAO.update(minhaProba);
-			log.info("Actualizados os datos da proba: " +minhaProba.toString());
+			log.info("Actualizados os datos da proba: " +minhaProba);
 			}catch(DataAccessException e){
-			log.error("Erro actualizando os datos da proba: "+ minhaProba.toString());
+			log.error("Erro actualizando os datos da proba: "+ minhaProba);
 			throw e;
 			}	
 	}
@@ -224,7 +224,7 @@ private HospitalDAO hospitalDAO;
 	public TipoProba recuperarTipoProbaBDPorId(Long id) {
 		try{
 			TipoProba proba =hospitalDAO.findTipoProbaById(id);
-			log.info("Encontrado os datos da proba " +proba.toString()+" con id: " + id);
+			log.info("Encontrado os datos da proba " +proba+" con id: " + id);
 			return proba;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando a proba de id: "+ id);
@@ -250,7 +250,7 @@ private HospitalDAO hospitalDAO;
 	public List<TipoProba> recuperarTodosTiposProbasBD() {
 		try{
 			List<TipoProba> probas =hospitalDAO.findAllTiposProbas();
-			log.info("Encontrados datos de todas las probas: " + probas.toString());
+			log.info("Encontrados datos de todas las probas: " + probas);
 			return probas;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando os datos de todos as probas");
@@ -263,9 +263,9 @@ private HospitalDAO hospitalDAO;
 	public void altaNovaCitaBD(Cita minhaCita) {
 		try{
 			citaDAO.create(minhaCita);
-			log.info("Gravados os datos da cita: " + minhaCita.toString());
+			log.info("Gravados os datos da cita: " + minhaCita);
 			}catch(DataAccessException e){
-			log.error("Erro gravando os datos da cita: "+ minhaCita.toString());
+			log.error("Erro gravando os datos da cita: "+ minhaCita);
 			throw e;
 			}	
 		
@@ -276,9 +276,9 @@ private HospitalDAO hospitalDAO;
 	public void borradoCitaBD(Cita minhaCita) {
 		try{
 			citaDAO.remove(minhaCita);
-			log.info("Borrados os datos da cita: " + minhaCita.toString());
+			log.info("Borrados os datos da cita: " + minhaCita);
 			}catch(DataAccessException e){
-			log.error("Erro borrando os datos da cita: "+ minhaCita.toString());
+			log.error("Erro borrando os datos da cita: "+ minhaCita);
 			throw e;
 			}	
 		
@@ -289,9 +289,9 @@ private HospitalDAO hospitalDAO;
 	public void modificacionCitaBD(Cita minhaCita) {
 		try{
 			citaDAO.update(minhaCita);
-			log.info("Actualizados os datos da cita: " + minhaCita.toString());
+			log.info("Actualizados os datos da cita: " + minhaCita);
 			}catch(DataAccessException e){
-			log.error("Erro actualizando os datos da cita: "+ minhaCita.toString());
+			log.error("Erro actualizando os datos da cita: "+ minhaCita);
 			throw e;
 			}	
 		
@@ -302,7 +302,7 @@ private HospitalDAO hospitalDAO;
 	public Cita recuperarCitaBDPorId(Long id) {
 		try{
 			Cita cita =citaDAO.findCitaById(id);
-			log.info("Encontrado os datos da cita " +cita.toString()+" con id: " + id);
+			log.info("Encontrado os datos da cita " +cita+" con id: " + id);
 			return cita;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando a cita de id: "+ id);
@@ -315,7 +315,7 @@ private HospitalDAO hospitalDAO;
 	public Cita recuperarCitaBDPorCodigo(String codigo) {
 		try{
 			Cita cita =citaDAO.findCitaByCodigo(codigo);
-			log.info("Encontrado os datos da cita " +cita.toString()+" con codigo: " + codigo);
+			log.info("Encontrado os datos da cita " +cita+" con codigo: " + codigo);
 			return cita;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando a cita de codigo: "+ codigo);
@@ -328,7 +328,7 @@ private HospitalDAO hospitalDAO;
 	public List<Consulta> recuperarTodasConsultasMedicoData(Medico meuMedico, LocalDate minhaData) {
 		try{
 			List<Consulta> consultas =citaDAO.findAllConsultasMedicoData(meuMedico, minhaData);
-			log.info("Encontrados datos de todas las consultas: " +consultas.toString() + "atendidas por el medico: "+ meuMedico+ ", na fecha: "+ minhaData);
+			log.info("Encontrados datos de todas las consultas: " +consultas + "atendidas por el medico: "+ meuMedico+ ", na fecha: "+ minhaData);
 			return consultas;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando os datos de todos as consultas atendidas por el medico: "+ meuMedico+ ", na fecha: "+ minhaData);
@@ -342,7 +342,7 @@ private HospitalDAO hospitalDAO;
 	public List<Proba> recuperarTodasProbasData(LocalDate minhaData) {
 		try{
 			List<Proba> probas =citaDAO.findAllProbasData(minhaData);
-			log.info("Encontrados datos de todas las probas: " +probas.toString() +" na fecha: "+ minhaData);
+			log.info("Encontrados datos de todas las probas: " +probas +" na fecha: "+ minhaData);
 			return probas;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando os datos de todos as probas do dia: " + minhaData);
@@ -355,7 +355,7 @@ private HospitalDAO hospitalDAO;
 	public List<Consulta> recuperarTodasConsultasPaciente(Paciente meuPaciente) {
 		try{
 			List<Consulta> consultas =citaDAO.findAllConsultasPaciente(meuPaciente);
-			log.info("Encontrados datos de todas las consultas: " +consultas.toString() +" do paciente: "+ meuPaciente);
+			log.info("Encontrados datos de todas las consultas: " +consultas +" do paciente: "+ meuPaciente);
 			return consultas;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando os datos de todos as consultas do paciente: " + meuPaciente);
@@ -368,7 +368,7 @@ private HospitalDAO hospitalDAO;
 	public List<Proba> recuperarTodasProbasPaciente(Paciente meuPaciente) {
 		try{
 			List<Proba> probas =citaDAO.findAllProbasPaciente(meuPaciente);
-			log.info("Encontrados datos de todas las probas: " +probas.toString() +" do paciente: "+ meuPaciente);
+			log.info("Encontrados datos de todas las probas: " +probas +" do paciente: "+ meuPaciente);
 			return probas;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando os datos de todos as probas  do paciente: " + meuPaciente);
@@ -381,7 +381,9 @@ private HospitalDAO hospitalDAO;
 	public SortedSet<Cita> recuperarTodasCitasPaciente(Paciente meuPaciente) {
 		try{
 			SortedSet<Cita> citas = citaDAO.findAllCitasPaciente(meuPaciente);
-			log.info("Encontrados datos de todas las citas: " +citas.toString() +" do paciente: "+ meuPaciente);
+			meuPaciente.setCitas(citas);
+			//setcitas pacientes de lo que recupere
+			log.info("Encontrados datos de todas las citas: " +citas +" do paciente: "+ meuPaciente);
 			return citas;
 			}catch(DataAccessException e){
 			log.error("Erro encontrando os datos de todos as citas  do paciente: " + meuPaciente);
@@ -393,7 +395,10 @@ private HospitalDAO hospitalDAO;
 	@Transactional(value="myTransactionManager")
 	public Paciente recuperarPacienteCita(Cita minhaCita) {
 		try{
-			Paciente paciente =citaDAO.findPacienteCita(minhaCita);
+			
+			citaDAO.findPacienteCita(minhaCita);
+			Paciente paciente= minhaCita.getPaciente();
+			minhaCita.setPaciente(paciente);
 			log.info("Encontrado os datos do paciente: " +paciente+" da cita: " + minhaCita);
 			return paciente;
 			}catch(DataAccessException e){
@@ -406,7 +411,9 @@ private HospitalDAO hospitalDAO;
 	@Transactional(value="myTransactionManager")
 	public Medico recuperarMedicoConsulta(Consulta minhaConsulta) {
 		try{
-			Medico medico =citaDAO.findMedicoConsulta(minhaConsulta);
+			citaDAO.findMedicoConsulta(minhaConsulta);
+			Medico medico= minhaConsulta.getMedico();
+			minhaConsulta.setMedico(medico);
 			log.info("Encontrado os datos do medico: " +medico+" da consulta: " + minhaConsulta);
 			return medico;
 			}catch(DataAccessException e){
@@ -420,6 +427,7 @@ private HospitalDAO hospitalDAO;
 	public Set<TipoDoenza> recuperarDoenzasConsulta(Consulta minhaConsulta) {
 		try{
 			Set<TipoDoenza> doenzas =citaDAO.findAllDoenzasConsulta(minhaConsulta);
+			minhaConsulta.setDoenzas(doenzas);
 			log.info("Encontrado os datos das doenzas: " + doenzas+" da consulta: " + minhaConsulta);
 			return doenzas;
 			}catch(DataAccessException e){
@@ -432,7 +440,9 @@ private HospitalDAO hospitalDAO;
 	@Transactional(value="myTransactionManager")
 	public TipoProba recuperarTipoProba(Proba minhaProba) {
 		try{
-			TipoProba  tipoProba  =citaDAO.findTipoProba(minhaProba);
+			citaDAO.findTipoProba(minhaProba);
+			TipoProba tipoProba= minhaProba.getTipoProba();
+			minhaProba.setTipoProba(tipoProba);
 			log.info("Encontrado os datos do tipo da proba: " +tipoProba+" da proba: " + minhaProba);
 			return tipoProba;
 			}catch(DataAccessException e){

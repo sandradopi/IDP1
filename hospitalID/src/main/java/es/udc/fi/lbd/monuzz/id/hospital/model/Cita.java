@@ -32,6 +32,7 @@ public abstract class Cita implements Comparable<Cita> {
 	protected String codigo;
 	
 	@Column(name="dataHora", nullable=false)
+	@Convert(converter=LocalDateTimeAttributeConverter.class)
 	protected LocalDateTime dataHora;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -64,7 +65,7 @@ public abstract class Cita implements Comparable<Cita> {
 
 	public String getCodigo() {return this.codigo;}
 
-	@Convert(converter=LocalDateTimeAttributeConverter.class)
+	
 	public LocalDateTime getDataHora() {return this.dataHora;}
 
 	public Paciente getPaciente() {return this.paciente;}

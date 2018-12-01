@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -67,29 +69,31 @@ public class CitaDAOImpl implements CitaDAO {
 
 	@Override
 	public List<Consulta> findAllConsultasMedicoData(Medico meuMedico, LocalDate minhaData) {
-		return sessionFactory.getCurrentSession().createQuery("from Consulta c where c.medico = :meuMedico AND c.data = :minhaData order by c.data ").setParameter("meuMedico", meuMedico).setParameter("minhaData", minhaData).list();
+		return sessionFactory.getCurrentSession().createQuery("from Consulta c where c.medico = :meuMedico AND c.dataHora = :minhaData order by c.dataHora ").setParameter("meuMedico", meuMedico).setParameter("minhaData", minhaData).list();
 		
 	}
 
 	@Override
 	public List<Proba> findAllProbasData(LocalDate minhaData) {
-		return sessionFactory.getCurrentSession().createQuery("from Proba c where c.data = :minhaData order by c.data ").setParameter("minhaData", minhaData).list();
+		return sessionFactory.getCurrentSession().createQuery("from Proba c where c.dataHora = :minhaData order by c.dataHora ").setParameter("minhaData", minhaData).list();
 	}
 
 	@Override
 	public List<Consulta> findAllConsultasPaciente(Paciente meuPaciente) {
-		return sessionFactory.getCurrentSession().createQuery("from Consulta c where c.paciente = :meuPaciente").setParameter("meuPaciente", meuPaciente).list();
+		return sessionFactory.getCurrentSession().createQuery("from Consulta c where c.paciente = :meuPaciente order by c.dataHora desc").setParameter("meuPaciente", meuPaciente).list();
 	}
 
 	@Override
 	public List<Proba> findAllProbasPaciente(Paciente meuPaciente) {
-		return sessionFactory.getCurrentSession().createQuery("from Proba c where c.paciente = :meuPaciente").setParameter("meuPaciente", meuPaciente).list();
+		return sessionFactory.getCurrentSession().createQuery("from Proba c where c.paciente = :meuPaciente order by c.dataHora desc").setParameter("meuPaciente", meuPaciente).list();
 	}
 
 	@Override
 	public SortedSet<Cita> findAllCitasPaciente(Paciente meuPaciente) {
 		return (SortedSet<Cita>) sessionFactory.getCurrentSession().createQuery("from Cita c where c.paciente = :meuPaciente order by c.dataHora").setParameter("meuPaciente", meuPaciente).list();
+	
 	}
+	
 
 	@Override
 	public Paciente findPacienteCita(Cita minhaCita) {
@@ -99,18 +103,20 @@ public class CitaDAOImpl implements CitaDAO {
 
 	@Override
 	public Medico findMedicoConsulta(Consulta minhaConsulta) {
-		return (Medico) sessionFactory.getCurrentSession().createQuery("Select c.medico from Consulta c where c = :minhaConsulta").setParameter("minhaConsulta", minhaConsulta).uniqueResult();
+		return null;
+				//(Medico) sessionFactory.getCurrentSession().createQuery("Select c.medico from Consulta c where c = :minhaConsulta").setParameter("minhaConsulta", minhaConsulta).uniqueResult();
 		
 	}
 
 	@Override
 	public Set<TipoDoenza> findAllDoenzasConsulta(Consulta minhaCita) {
-		return (Set<TipoDoenza>) sessionFactory.getCurrentSession().createQuery("select c.doenzas from Consulta c where c = :minhaCita").setParameter("minhaCita", minhaCita).list();
+		return  (Set<TipoDoenza>) sessionFactory.getCurrentSession().createQuery("select c.doenzas from Consulta c where c = :minhaCita").setParameter("minhaCita", minhaCita).list();
 	}
 
 	@Override
 	public TipoProba findTipoProba(Proba minhaCita) {
-		return (TipoProba) sessionFactory.getCurrentSession().createQuery("Select c.tipoProba from Proba c where c = :minhaCita").setParameter("minhaCita", minhaCita).uniqueResult();
+		return null;
+				//(TipoProba) sessionFactory.getCurrentSession().createQuery("Select c.tipoProba from Proba c where c = :minhaCita").setParameter("minhaCita", minhaCita).uniqueResult();
 	}
 
 }

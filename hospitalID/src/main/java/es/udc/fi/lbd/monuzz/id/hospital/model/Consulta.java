@@ -33,7 +33,7 @@ public class Consulta extends Cita {
 	@Column(name="doenzas")
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-    		name = "CONSULTA-TIPODOENZA",
+    		name = "CONSULTA_TIPODOENZA",
     		joinColumns = {@JoinColumn(name = "idCita")},
     		inverseJoinColumns = {@JoinColumn(name = "idTipoDoenza")}
     		)
