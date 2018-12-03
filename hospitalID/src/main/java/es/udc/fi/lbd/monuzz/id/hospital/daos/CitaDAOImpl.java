@@ -4,6 +4,7 @@
 package es.udc.fi.lbd.monuzz.id.hospital.daos;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
@@ -69,13 +70,18 @@ public class CitaDAOImpl implements CitaDAO {
 
 	@Override
 	public List<Consulta> findAllConsultasMedicoData(Medico meuMedico, LocalDate minhaData) {
-		return sessionFactory.getCurrentSession().createQuery("from Consulta c where c.medico = :meuMedico AND c.dataHora = :minhaData order by c.dataHora ").setParameter("meuMedico", meuMedico).setParameter("minhaData", minhaData).list();
+		LocalDateTime minhaData1 = minhaData.atStartOfDay();
+		LocalDateTime minhaData2 = minhaData.atTime(23,59);
+		return sessionFactory.getCurrentSession().createQuery("from Consulta c where c.medico = :meuMedico AND (c.dataHora >= :minhaData1 AND c.dataHora <= :minhaData2) order by c.dataHora ").setParameter("meuMedico", meuMedico).setParameter("minhaData1", minhaData1).setParameter("minhaData2", minhaData2).list();
 		
 	}
 
 	@Override
 	public List<Proba> findAllProbasData(LocalDate minhaData) {
-		return sessionFactory.getCurrentSession().createQuery("from Proba c where c.dataHora = :minhaData order by c.dataHora ").setParameter("minhaData", minhaData).list();
+		LocalDateTime minhaData1 = minhaData.atStartOfDay();
+		LocalDateTime minhaData2 = minhaData.atTime(23,59);
+		
+		return sessionFactory.getCurrentSession().createQuery("from Proba c where c.dataHora >= :minhaData1 AND c.dataHora <= :minhaData2 order by c.dataHora ").setParameter("minhaData1", minhaData1).setParameter("minhaData2", minhaData2).list();
 	}
 
 	@Override
