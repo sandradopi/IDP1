@@ -5,23 +5,26 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.udc.fi.lbd.monuzz.id.hospital.daos.ExtraDAO;
 import es.udc.fi.lbd.monuzz.id.hospital.daos.ExtraDAOHibImpl;
 import es.udc.fi.lbd.monuzz.id.hospital.model.Cita;
 import es.udc.fi.lbd.monuzz.id.hospital.model.Medico;
 import es.udc.fi.lbd.monuzz.id.hospital.model.Paciente;
 
+@Service
 public class ExtraServiceImpl implements ExtraService{
 
 	@Autowired
-	private ExtraDAOHibImpl extraDAO;
+	private ExtraDAO extraDAO;
 	static Logger log= Logger.getLogger("hospital");
 	
 	
 	@Override
 	@Transactional(value="myTransactionManager")
-	public List<Cita> CitasPacienteMedico(Long numPaciente,Long numColexiado){
+	public List<Cita> CitasPacienteMedico(String numPaciente,String numColexiado){
 		try{
 			List<Cita> citas= extraDAO.CitasPacienteMedico(numPaciente, numColexiado);
 			log.info("Encontrados os datos da citas: "+ citas +" del paciente con el numero: " + numPaciente+ "con el medico con el numero: "+ numColexiado);
@@ -35,14 +38,28 @@ public class ExtraServiceImpl implements ExtraService{
 	@Override
 	@Transactional(value="myTransactionManager")
 	public Long countAllCitasPaciente(Paciente paciente){
-		return null;
+		try {
+			Long numeroCitas = extraDAO.countAllCitasPaciente(paciente);
+			log.info("Encontradas "+ numeroCitas + " citas do paciente: " + paciente);
+			return numeroCitas;
+		}catch (DataAccessException e) {
+			log.error("Erro encontrando o número de citas que tuvo o paciente: " + paciente);
+			throw e;
+		}
 		
 	}
-
+	
 	@Override
 	@Transactional(value="myTransactionManager")
 	public List<Paciente> findPacientesNoMedico(Medico medico){
-		return null;
+		try {
+			List<Paciente> pacientes = extraDAO.findPacientesNoMedico(medico);
+			log.info("Encontrados os pacientes: "+ pacientes +" que non teñen ningunha cita co médico: " + medico);
+			return pacientes;
+		}catch (DataAccessException e) {
+			log.error("Erro encontrando os pacientes que non teñen ningunha cita co médico: " + medico);
+			throw e;
+		}
 		
 	}
 }

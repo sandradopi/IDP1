@@ -5,9 +5,11 @@ package es.udc.fi.lbd.monuzz.id.hospital.daos;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -96,8 +98,11 @@ public class CitaDAOImpl implements CitaDAO {
 
 	@Override
 	public SortedSet<Cita> findAllCitasPaciente(Paciente meuPaciente) {
-		return (SortedSet<Cita>) sessionFactory.getCurrentSession().createQuery("from Cita c where c.paciente = :meuPaciente order by c.dataHora").setParameter("meuPaciente", meuPaciente).list();
-	
+		
+       
+		List<Cita> citas= sessionFactory.getCurrentSession().createQuery("from Cita c where c.paciente = :meuPaciente order by c.dataHora").setParameter("meuPaciente", meuPaciente).list();
+		TreeSet set =new TreeSet(citas);
+		return set;
 	}
 	
 
@@ -116,7 +121,9 @@ public class CitaDAOImpl implements CitaDAO {
 
 	@Override
 	public Set<TipoDoenza> findAllDoenzasConsulta(Consulta minhaCita) {
-		return  (Set<TipoDoenza>) sessionFactory.getCurrentSession().createQuery("select c.doenzas from Consulta c where c = :minhaCita").setParameter("minhaCita", minhaCita).list();
+		List<TipoDoenza> doenzas= sessionFactory.getCurrentSession().createQuery("select c.doenzas from Consulta c where c = :minhaCita").setParameter("minhaCita", minhaCita).list();
+		Set<TipoDoenza> set = new HashSet<TipoDoenza>(doenzas);
+		return set;
 	}
 
 	@Override

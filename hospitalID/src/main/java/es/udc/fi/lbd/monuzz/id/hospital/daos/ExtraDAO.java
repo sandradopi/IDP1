@@ -10,7 +10,7 @@ public interface ExtraDAO {
 	
 	//Devuelve las citas (consultas) de un paciente con el numPaciente indicado y 
 	//con el medico con el numColexiado indicado
-	public List<Cita> CitasPacienteMedico(Long numPaciente,Long numColexiado);
+	public List<Cita> CitasPacienteMedico(String numPaciente,String numColexiado);
 	//Devuelve el numero de citas que ha tenido un paciente en concreto
 	public Long countAllCitasPaciente(Paciente paciente);
 	//Devuelve los pacientes que no tienen ninguna cita con ese medico
