@@ -28,7 +28,7 @@ public interface ExtraService  {
 	public List<Cita> CitasPacienteMedico(String numPaciente,String numColexiado);
 	//Devuelve el numero de citas que ha tenido un paciente en concreto
 	public Long countAllCitasPaciente(Paciente paciente);
-	//Devuelve los pacientes que no tienen ninguna cita con ese medico
-	public List<Paciente> findPacientesNoMedico(Medico medico);
+	//Devuelve los pacientes que no tienen ninguna cita con un medico en concreto
+	public List<Paciente> findPacientesNoCita(Medico medico);
 	
 }

@@ -26,8 +26,8 @@ public class ExtraDAOHibImpl implements ExtraDAO{
 			}
 	
 		@Override
-		public List<Paciente> findPacientesNoMedico(Medico medico){
-		 return  sessionFactory.getCurrentSession().createQuery("from Paciente p where p not in (from Paciente p inner join p.citas c where c.medico=:medico)  ").setParameter("medico", medico).list();
+		public List<Paciente> findPacientesNoCita(Medico medico){
+		 return  sessionFactory.getCurrentSession().createQuery("from Paciente p where p not in (select p from Paciente p inner join p.citas c inner join  c.medico m where m=:medico)  ").setParameter("medico", medico).list();
 		
 	}
 	

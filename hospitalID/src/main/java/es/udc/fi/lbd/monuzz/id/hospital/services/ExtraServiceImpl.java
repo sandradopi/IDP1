@@ -51,13 +51,13 @@ public class ExtraServiceImpl implements ExtraService{
 	
 	@Override
 	@Transactional(value="myTransactionManager")
-	public List<Paciente> findPacientesNoMedico(Medico medico){
+	public List<Paciente> findPacientesNoCita(Medico medico){
 		try {
-			List<Paciente> pacientes = extraDAO.findPacientesNoMedico(medico);
-			log.info("Encontrados os pacientes: "+ pacientes +" que non teñen ningunha cita co médico: " + medico);
+			List<Paciente> pacientes = extraDAO.findPacientesNoCita(medico);
+			log.info("Encontrados os pacientes: "+ pacientes +" que non teñen ningunha cita con el medico:" + medico);
 			return pacientes;
 		}catch (DataAccessException e) {
-			log.error("Erro encontrando os pacientes que non teñen ningunha cita co médico: " + medico);
+			log.error("Erro encontrando os pacientes que non teñen ningunha cita con el medico:" + medico);
 			throw e;
 		}
 		

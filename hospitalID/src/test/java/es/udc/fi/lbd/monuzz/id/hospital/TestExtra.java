@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import es.udc.fi.lbd.monuzz.id.hospital.model.Cita;
 import es.udc.fi.lbd.monuzz.id.hospital.model.Consulta;
+import es.udc.fi.lbd.monuzz.id.hospital.model.Paciente;
 import es.udc.fi.lbd.monuzz.id.hospital.services.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,6 +36,9 @@ public class TestExtra {
 	
 	@Autowired
 	private PacienteService pacienteService;
+	
+	@Autowired
+	private HospitalService hospitalService;
 
 	@Before
 	public void setUp() throws Exception { 
@@ -77,6 +81,7 @@ public class TestExtra {
 	
 	private void a_Test() {
 		List<Cita> citasPacMed;
+		List<Paciente> pacientesNoMed;
 		Cita cita_EXW1;
 		
 		
@@ -100,19 +105,18 @@ public class TestExtra {
 		citasPacMed = extraService.CitasPacienteMedico(testUtils.paciente_Z.getNumPaciente(),testUtils.medico_D.getNumColexiado());
 		assertEquals (0,citasPacMed.size());
 		
-		//si creamos una nueva consulta
-		cita_EXW1 = new Consulta("cita_EXW1", LocalDateTime.of(2018, Month.FEBRUARY, 1, 8, 45), testUtils.paciente_W, "Motivo_W3", testUtils.medico_B);
-		assertEquals (2,citasPacMed.size());
-		assertEquals (citasPacMed.get(0), testUtils.cita_W3);
-		assertEquals (citasPacMed.get(1), cita_EXW1);
+		// Recuperacion de todas las pacientes que non tienen ninguna cita---------------------------------------------------------------------------
+		pacientesNoMed = extraService.findPacientesNoCita(testUtils.medico_A);
+		assertEquals (3,pacientesNoMed.size());
+		pacientesNoMed = extraService.findPacientesNoCita(testUtils.medico_B);
+		assertEquals (2,pacientesNoMed.size());
+		pacientesNoMed = extraService.findPacientesNoCita(testUtils.medico_C);
+		assertEquals (4,pacientesNoMed.size());
+		pacientesNoMed = extraService.findPacientesNoCita(testUtils.medico_D);
+		assertEquals (4,pacientesNoMed.size());
 		
 		
-		//si borramos un paciente
-		/*pacienteService.borradoPacienteBD(testUtils.paciente_W);
-		citasPacMed = extraService.CitasPacienteMedico(testUtils.paciente_W.getNumPaciente(),testUtils.medico_A.getNumColexiado());
-		assertEquals (0,citasPacMed.size());
-		citasPacMed = extraService.CitasPacienteMedico(testUtils.paciente_W.getNumPaciente(),testUtils.medico_B.getNumColexiado());
-		assertEquals (0,citasPacMed.size());*/
+		
 	}
 	
 
