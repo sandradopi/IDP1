@@ -83,6 +83,7 @@ public class TestExtra {
 		List<Cita> citasPacMed;
 		List<Paciente> pacientesNoMed;
 		Cita cita_EXW1;
+		Long citasPac;
 		
 		
 	// Recuperacion de todas las citas que tiene un paciente con un médico---------------------------------------------------------------------------
@@ -115,7 +116,15 @@ public class TestExtra {
 		pacientesNoMed = extraService.findPacientesNoCita(testUtils.medico_D);
 		assertEquals (4,pacientesNoMed.size());
 		
-		
+		//Recuperacion del numero de citas que ha tenido un paciente en concreto
+		citasPac = extraService.countAllCitasPaciente(testUtils.paciente_W);
+		assertEquals(new Long(4), citasPac);
+		citasPac = extraService.countAllCitasPaciente(testUtils.paciente_X);
+		assertEquals(new Long(2), citasPac);
+		citasPac = extraService.countAllCitasPaciente(testUtils.paciente_Y);
+		assertEquals(new Long(0), citasPac);
+		citasPac = extraService.countAllCitasPaciente(testUtils.paciente_Z);
+		assertEquals(new Long(0), citasPac);
 		
 	}
 	
